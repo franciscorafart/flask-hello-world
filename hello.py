@@ -10,11 +10,16 @@ def index():
 def hello():
     return "Hello world!"
 
-#variable rules for the url search input
+#variable rules for the url search input. <variable_name> refers to a variable in the function
 @app.route("/<user>")
 def user(user):
     #this is the return to the body
     return 'User %s' % user
+
+@app.route("/post/<int:post_id>") # converter:variable_name is a converter
+def show_post(post_id):
+    #show post with given ID, id is an integer
+    return 'Post %d' % post_id
 
 #URL building -- We pass the content of the function to be defined later
 @app.route("/login")
@@ -33,7 +38,7 @@ with app.test_request_context():
 def login2():
     if request.method == "POST":
         return "Do the Login stuff"
-    # case GET 
+    # case GET
     else:
         return "Do the register stuff"
 
